@@ -6,20 +6,11 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import { BrowserRouter } from "react-router-dom";
 
-function Greetings(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
-    return <Home />;
-  }
-  return <Login />;
-}
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <Greetings isLoggedIn={false} />
     </BrowserRouter>
   </React.StrictMode>
 );
