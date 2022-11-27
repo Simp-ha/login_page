@@ -1,9 +1,8 @@
 import "./Register.css";
-import { useContext, useState } from "react";
-import { Route, useNavigate } from "react-router";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth, { AuthContext } from "../utils/firebase";
-import Home from "./Home";
 
 const Register = ({}) => {
   const [email, setEmail] = useState("");

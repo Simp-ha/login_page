@@ -4,7 +4,7 @@ import Register from "./screens/Register";
 import Home from "./screens/Home";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { AuthProvider } from "./utils/firebase";
-import { PrivateRoute } from "./utils/privateRoute";
+import { PrivateRoute } from "./utils/privateRoute"; //not using it yet
 
 function App() {
   return (
