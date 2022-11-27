@@ -1,27 +1,37 @@
 import "./Register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth, { AuthContext } from "../utils/firebase";
 
 const Register = ({}) => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
+  const [name, setName] = useState("");
   const Navigate = useNavigate();
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, pwd);
+      await updateProfile(auth.currentUser, { displayName: name });
       Navigate("/home");
     } catch (error) {
       alert(error.message);
     }
   };
-
   return (
     <div className="column">
       <h1>MAKE ACCOUNT!</h1>
       <form onSubmit={handleSignup}>
+        <label className="column">
+          Set Nickname:
+          <input
+            type="text"
+            id="name"
+            onChange={(event) => setName(event.target.value)}
+            value={name}
+          />
+        </label>
         <label className="column">
           Set E-mail:
           <input
@@ -42,6 +52,7 @@ const Register = ({}) => {
             required
           />
         </label>
+
         <p>
           <button type="submit">Sign Up</button>
         </p>

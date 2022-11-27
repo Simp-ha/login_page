@@ -14,12 +14,14 @@ function Home() {
     await signOut(auth);
     Navigate("/");
   };
+  /*
   var str = user.email;
   var nameMatch = str.match(/^([^@]*)@/);
   var name = nameMatch ? nameMatch[1] : null;
+  */
   return (
     <div className="column">
-      <h1>Welcome {name}!</h1>
+      <h1>Welcome {user.displayName}!</h1>
       <button onClick={logout}>Sign out</button>
     </div>
   );
