@@ -1,24 +1,52 @@
-import React from "react";
 import "./Login.css";
-function LogginButton(props) {
-  return <button onClick={props.onClick}> Login</button>;
-}
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import auth from "../utils/firebase";
 
-function Login() {
+const Login = ({}) => {
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const Navigate = useNavigate();
+  const handleSignIn = async (event) => {
+    event.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, pwd);
+      Navigate("/home");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <div className="column">
-      <header className="header">Sign in!</header>
-      <form>
+      <h1>Sign in!</h1>
+      <form onSubmit={handleSignIn}>
         <label className="column">
-          E-mail:
-          <input type="email" name="E-mail" />
-          Password:
-          <input type="password" name="Password" />
+          Email:
+          <input
+            type="email"
+            id="E-mail"
+            onChange={(event) => setEmail(event.target.value)} //user state
+            value={email} //clear fields when you sign in
+            required
+          />
         </label>
-        <input type="submit" value="Sign in" />
+        <label className="column">
+          Password:
+          <input
+            type="password"
+            id="Password"
+            onChange={(event) => setPwd(event.target.value)}
+            value={pwd}
+            required
+          />
+        </label>
+        <p>
+          <button>Sign In</button>
+        </p>
       </form>
-      <a href="/register"> Don't you have an account? Sign up!</a>
+      <a href="/register"> You don't have an account? Sign up!</a>
     </div>
   );
-}
+};
 export default Login;
